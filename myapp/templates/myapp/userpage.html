@@ -1,0 +1,17 @@
+{% extends 'myapp/base.html' %}
+{% block title %}{{request.user.username}}| Get My Book{% endblock %}
+{% block login %}
+<li class="nav-item">
+    <a class="nav-link" href="/logout/">Logout</a>
+</li>  
+{% endblock %} 
+
+{% block style %}
+<style>
+    body{ background: -webkit-linear-gradient(left, #DE6262 , #FFB88C);}
+    .container{ color:white; background:rgba(0, 0, 0, .5);}
+</style>
+{% endblock %}
+{% block content %}
+{% endblock %}
+

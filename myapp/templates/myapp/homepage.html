@@ -1,0 +1,92 @@
+{% extends 'myapp/base.html' %}
+{% block title %}Home | Get My Book{% endblock %}
+
+{% block style %}
+<style>
+    
+    .list-group-item{
+        padding: 2%;
+    }
+    .card-title{
+        padding-bottom: 0%;
+    }
+
+    
+
+    .jumbotron {
+        margin-bottom: 0px;
+        height: 250px;
+        color: white;
+        text-shadow: black 0.3em 0.3em 0.3em;
+        background: url('https://images.pexels.com/photos/34592/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center ;
+    }
+    
+    .jumbotron img{
+        background: rgba(0,0,0,0.75);
+        width: 300px;
+    }
+</style>
+{% endblock %}
+
+{% block script %}
+    <script> 
+    $(function(){
+      $("#includedContent").load("/books/"); 
+    });
+    </script> 
+
+{% endblock %}
+
+
+{% block login %}
+{% if user.is_authenticated %}
+<li class="nav-item">
+    <a class="nav-link" href="/userbooks/" ><i class="fa fa-user-circle"></i> {{request.user.first_name}}</a>
+</li> 
+<li class="nav-item">
+    <a class="nav-link" href="/logout/"><i class="fa fa-sign-out"></i> Logout</a>
+</li>  
+{% else %}
+<li class="nav-item">
+    <a class="nav-link" href="/signup/"><i class="fa fa-user-plus"></i> Sign Up</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/login/"><i class="fa fa-sign-in"></i> Login</a>
+</li>
+{% endif %}
+{% endblock %} 
+
+
+{% block content %}
+{% load static %}
+<div class="jumbotron text-center " >
+    <img src="{% static 'logo.png' %}"  alt="logo">
+    <p>Welcome, a Library Management System developed by <em>Eashwer K S</em>!</p>
+</div>
+<div class="container">
+        <div class="row">
+          <div id="includedContent" class="col-sm-8">
+            
+          </div>
+          <div class="col-sm-4">
+            <div class="card ">
+                <h5 class="card-title" style="color:#E36262;">Dynamic content</h5>
+                <p class="card-text">The library has the following record counts:</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Books:</strong> {{ num_books }}</li>
+                    <li class="list-group-item"><strong>Copies:</strong> {{ num_instances }}</li>
+                    <li class="list-group-item"><strong>Copies available:</strong> {{ num_instances_available }}</li>
+                    <li class="list-group-item"><strong>Authors:</strong> {{ num_authors }}</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+
+         
+    
+
+{% endblock %}
+
+
+
+
